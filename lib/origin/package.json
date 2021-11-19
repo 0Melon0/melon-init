@@ -6,10 +6,30 @@
   "scripts": {
     "dev": "webpack --config=webpack.dev.js",
     "start": "webpack serve --open --config=webpack.dev.js",
-    "build": "webpack --name={{projectName}} --config=webpack.prod.js"
+    "build": "webpack --config=webpack.prod.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "css-loader": "^6.4.0",
+    "fontmin-webpack": "^3.1.0",
+    "html-loader": "^2.1.2",
+    "html-webpack-plugin": "^5.4.0",
+    "image-minimizer-webpack-plugin": "^2.2.0",
+    "imagemin-mozjpeg": "^9.0.0",
+    "imagemin-pngquant": "^9.0.2",
+    "imagemin-webp": "^6.0.0",
+    "melon-min-font-plugin": "^1.0.5",
+    "melon-webp-plugin": "^1.0.1",
+    "mini-css-extract-plugin": "^2.4.2",
+    "sass": "^1.43.2",
+    "sass-loader": "^12.2.0",
+    "style-loader": "^3.3.0",
+    "webpack": "^5.58.2",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.3.1",
+    "webpack-sources": "^3.2.1"
+  }
 }
 
