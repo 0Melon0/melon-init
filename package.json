@@ -1,0 +1,29 @@
+{
+  "name": "melon-init",
+  "version": "1.0.0",
+  "description": "init project from melon-init",
+  "bin": {
+    "melon": "index.js"
+  },
+  "keywords": [
+    "cli",
+    "vue",
+    "egg",
+    "react"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0Melon0/melon-init.git"
+  },
+  "author": "melon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/0Melon0/melon-init/issues"
+  },
+  "dependencies": {
+    "commander": "^8.3.0",
+    "handlebars": "^4.7.7",
+    "inquirer": "^8.2.0",
+    "shelljs": "^0.8.4"
+  }
+}
