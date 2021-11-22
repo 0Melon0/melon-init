@@ -1,0 +1,32 @@
+pipeline {
+  agent any
+  stages {
+    stage('检出') {
+      steps {
+        checkout([
+          $class: 'GitSCM',
+          branches: [[name: env.GIT_BUILD_REF]],
+          userRemoteConfigs: [[
+            url: env.GIT_REPO_URL,
+            credentialsId: env.CREDENTIALS_ID
+          ]]])
+        }
+      }
+      stage('安装依赖') {
+        steps {
+          sh 'npm install'
+        }
+      }
+      stage('构建镜像并推送到 CODING Docker 制品库') {
+        steps {
+          sh 'docker build ./ -t ${CODING_DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION}'
+          useCustomStepPlugin(key: 'coding-public:artifact_docker_push', version: 'latest', params: [properties:'[]',repo:'egg-project',image:'${CODING_DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION}'])
+        }
+      }
+    }
+    environment {
+      CODING_DOCKER_REG_HOST = "${CCI_CURRENT_TEAM}-docker.pkg.${CCI_CURRENT_DOMAIN}"
+      CODING_DOCKER_IMAGE_NAME = "${PROJECT_NAME.toLowerCase()}"
+      DOCKER_IMAGE_VERSION = "${GIT_LOCAL_BRANCH}-${GIT_COMMIT}"
+    }
+  }
