@@ -1,6 +1,6 @@
 {
   "name": "melon-init",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "init project from melon-init",
   "bin": {
     "melon": "index.js"

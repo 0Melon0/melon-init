@@ -10,7 +10,7 @@ const inquirer = require('inquirer');
 //   .command('initEgg', '初始化 Egg 项目', { executableFile: 'lib/initEgg' }).alias('egg')
 
 program
-  .version("0.0.1")
+  .version("1.0.3")
   .description('初始化项目')
   .action(() => {
     inquirer
