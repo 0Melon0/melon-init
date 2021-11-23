@@ -2,6 +2,7 @@
 
 const { program } = require("commander");
 const inquirer = require('inquirer');
+const path = require("path");
 
 // program
 //   .version('0.0.1')
@@ -10,7 +11,7 @@ const inquirer = require('inquirer');
 //   .command('initEgg', '初始化 Egg 项目', { executableFile: 'lib/initEgg' }).alias('egg')
 
 program
-  .version("1.0.5")
+  .version("1.0.6")
   .description('初始化项目')
   .action(() => {
     inquirer
@@ -26,7 +27,7 @@ program
         const initFile = require(`./lib/init${val.projectType}`);
         initFile({
           rootDir: process.cwd(),
-          cliDir: path.join(__dirname, `${val.toLocaleLowerCase()}`)
+          cliDir: path.join(__dirname, 'lib', `${val.projectType.toLocaleLowerCase()}`)
         });
       })
   })
