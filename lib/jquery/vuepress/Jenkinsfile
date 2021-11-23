@@ -1,0 +1,32 @@
+pipeline {
+  agent any
+  stages {
+    stage('检出') {
+      steps {
+        checkout([
+          $class: 'GitSCM',
+          branches: [[name: env.GIT_BUILD_REF]],
+          userRemoteConfigs: [[
+            url: env.GIT_REPO_URL,
+            credentialsId: env.CREDENTIALS_ID
+          ]]])
+        }
+      }
+      stage('安装依赖') {
+        steps {
+          sh 'npm install'
+        }
+      }
+      stage('编译') {
+        steps {
+          sh 'npm run build'
+        }
+      }
+      stage('上传到 COS Bucket') {
+        steps {
+          useCustomStepPlugin(key: 'coding-public:cos_upload', version: 'latest', params: [secret_id:'{{secretId}}',secret_key:'{{secretKey}}',bucket:'{{bucket}}',region:'{{region}}',remote:'/{{projectName}}',local:'$WORKSPACE/docs/.vuepress/dist'])
+          echo "上传成功，访问 {{domain}}/{{projectName}}/index.html 预览效果"
+        }
+      }
+    }
+  }
