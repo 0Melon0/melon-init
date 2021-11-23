@@ -10,7 +10,7 @@ const inquirer = require('inquirer');
 //   .command('initEgg', '初始化 Egg 项目', { executableFile: 'lib/initEgg' }).alias('egg')
 
 program
-  .version("1.0.4")
+  .version("1.0.5")
   .description('初始化项目')
   .action(() => {
     inquirer
@@ -19,12 +19,15 @@ program
           type: "list",
           name: "projectType",
           message: "请选择项目类型",
-          choices: ['Vue', 'Nuxtjs', 'React', 'Uniapp', 'Egg', 'jQuery']
+          choices: ['Vue', 'Vuepress', 'Nuxtjs', 'React', 'Uniapp', 'Egg', 'jQuery']
         }
       ])
       .then(val => {
         const initFile = require(`./lib/init${val.projectType}`);
-        initFile();
+        initFile({
+          rootDir: process.cwd(),
+          cliDir: path.join(__dirname, `${val.toLocaleLowerCase()}`)
+        });
       })
   })
 
