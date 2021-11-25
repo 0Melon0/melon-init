@@ -1,0 +1,7 @@
+{
+  "name": "{{projectName}}",
+  "version": "1.0.0",
+  "description": "",
+  "title": "项目 {{projectName}} 接口文档",
+  "url": "http://127.0.0.1:7001"
+}

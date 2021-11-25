@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service #定义类似为服务(路由)
+metadata:
+  name: {{projectName}} #对应项目名称,下同
+  namespace: {{bluej}} #定义命名空间,与dev对应
+  labels:
+    app: {{projectName}}
+spec:
+  ports:
+  - port: 80 #对外暴露端口 
+    targetPort: 7001 #容器暴露端口 7001:egg,80:其他
+  selector:
+    app: {{projectName}}
+  type: LoadBalancer #以负载均衡方式部署 (NodePort直接以端口访问)

@@ -23,6 +23,15 @@ pipeline {
           useCustomStepPlugin(key: 'coding-public:artifact_docker_push', version: 'latest', params: [properties:'[]',repo:'egg-project',image:'${CODING_DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION}'])
         }
       }
+      stage('发布 API 文档') {
+        steps {
+          sh 'node -v'
+          sh 'yarn -v'
+          sh 'mkdir /apidoc_result'
+          sh 'yarn global add apidoc@0.29.0 && apidoc -i app/controller -o /apidoc_result && ls /apidoc_result -al'
+          codingReleaseApiDoc(apiDocId: env.API_DOC_ID, apiDocType: env.API_DOC_TYPE, cmd: '', resultFile: '../../apidoc_result/api_data.json', scanDir: '', postmanToken: '', postmanUid: '')
+        }
+      }
     }
     environment {
       CODING_DOCKER_REG_HOST = "${CCI_CURRENT_TEAM}-docker.pkg.${CCI_CURRENT_DOMAIN}"
