@@ -11,7 +11,7 @@ const path = require("path");
 //   .command('initEgg', '初始化 Egg 项目', { executableFile: 'lib/initEgg' }).alias('egg')
 
 program
-  .version("1.0.9")
+  .version("1.1.1")
   .description('初始化项目')
   .action(() => {
     inquirer
